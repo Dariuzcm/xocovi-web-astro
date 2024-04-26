@@ -1,31 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import Inicio from "../sections/Inicio.astro";
+import Product from "../sections/Product.astro";
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
-    <section class="h-screen max-h-screen">
-      <img src="/indexbg.png" class="index-bg h-full"  alt="imagen de flores de inicio"/>
-      <div class="absolute max-w-[40%] right-6 justify-center items-center content-center h-full gap-6 flex flex-col mx-5">
-        <img src="/xocovi-nocontent.png" alt="xocovi full logo" class="w-[80%]"/>
-        <p class="text-2xl px-6">
-          ¡Descubre el compromiso de XOCOVI con la salud y el bienestar
-          personal! A través de nuestros productos, respetamos el medio ambiente
-          y aprovechamos al máximo los beneficios de los recursos naturales y
-          nuestro entorno único. ¡Únete a nosotros en este viaje hacia una vida
-          más sana y sostenible!
-        </p>
-      </div>
-    </section>
+    <Inicio />
+    <Product />
   </main>
-
-  <style is:global>
-    .index-bg {
-      mask-image: linear-gradient(to left, black 50%, transparent 75%);
-      float: left;
-      object-fit: cover;
-      transform: rotateY(180deg);
-    }
-  </style>
 </Layout>

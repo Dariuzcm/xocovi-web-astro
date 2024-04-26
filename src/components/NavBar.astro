@@ -1,0 +1,85 @@
+<nav class="w-full z-10 navbar h-16 bg-white">
+  <div class="flex">
+    <img src="/xocovi-nav-icon.png" alt="" class="h-16 -top-0" />
+    <ul
+      id="navList"
+      class="flex justify-between gap-10 text-2xl font-semibold h-16 p-3 right-10 absolute"
+    >
+      <li id="li-inicio">
+        <a href='#inicio'>Inicio</a>
+      </li>
+      <li id="li-producto">
+        <a href='#producto'>Producto</a>
+      </li>
+      <li id="li-ingredients">
+        <a href='#ingredients'>Ingredientes</a>
+      </li>
+      <li id="li-contacto">
+        <a href='#contacto'>Contacto</a>
+      </li>
+      <li id="li-puntos-venta">
+        <a href='#puntos-venta'>Puntos de venta</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    const currentSection = document.elementFromPoint(
+      window.innerWidth / 2,
+      window.innerHeight / 2
+    );
+
+    if (currentSection) {
+      if (currentSection!.id === "inicio") {
+        navbar!.classList.remove("show");
+      } else {
+        navbar!.classList.add("show");
+      }
+      if (currentSection!.tagName === "SECTION")
+        changeColorNavbar(currentSection!.id);
+    }
+  });
+
+  function changeColorNavbar(sectionid: string) {
+    const selected = document.querySelector(`li[id='li-${sectionid}']`);
+    const previousSelected = document.querySelector("li.active");
+
+    previousSelected?.classList.remove("active");
+    selected?.classList.add("active");
+  }
+
+  
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition:
+      transform 0.3s ease-in-out,
+      color 0.3s ease-in-out;
+    transform: translateY(-100%);
+  }
+  .active {
+    color: #ba007c;
+  }
+
+  li {
+    transition: color 0.3s ease-in-out;
+  }
+  li :hover {
+    color: #ff3bbe;
+    transition: color 0.3s ease-in-out;
+  }
+  .navbar.show {
+    transform: translateY(0);
+  }
+  html {
+  scroll-behavior: smooth;
+}
+</style>
