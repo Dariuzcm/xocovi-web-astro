@@ -1,0 +1,57 @@
+---
+import type { IngredientCardProps } from "./IngredientCard.astro";
+import IngredientCard from "./IngredientCard.astro";
+
+const cardList: IngredientCardProps[] = [
+  {
+    title: "Arnica",
+    imageSrc: "ingredient-arnica.png",
+    resume:
+      "El árnica es una planta ampliamente utilizada en diversas culturas para tratar golpes, dolores, hematomas, hinchazones, afecciones dérmicas y prevenir infecciones. Posee propiedades antiinflamatorias, analgésicas y antibacterianas, siendo útil para prevenir morados, tratar ampollas, raspones y aliviar dolores musculares, desgarros, esguinces y artritis. También puede reducir moretones y la inflamación de bolsas oculares, siempre con precaución.",
+    processDescripion: "",
+  },
+  {
+    title: "Aceite de Coco",
+    imageSrc: "ingredient-coco.png",
+    resume:
+      "El aceite de coco es un hidratante rico en nutrientes, antioxidante y con propiedades antimicrobianas, antibióticas y antiinflamatorias, que combate la dermatitis, restablece el pH neutro de la piel, protege del sol y suaviza cicatrices.",
+    processDescripion: "",
+  },
+  {
+    title: "Cera de Aveja",
+    imageSrc: "ingredient-cera.png",
+    resume:
+      "Sus compuestos nutricionales se pueden aprovechar en beneficio como la gran cantidad de vitamina A su alto contenido de antioxidantes y hidratantes propiedades emolientes y antiinflamatorias.",
+    processDescripion: "",
+  },
+  {
+    title: "Hoja de menta",
+    imageSrc: "ingredient-mint.png",
+    resume:
+      "El mentol que contienen las hojas de menta, funciona para combatir los dolores musculares, contribuyen a una circulación sanguínea adecuada, la menta contiene grandes cantidades de vitaminas y minerales en sus hojas, propiedades antisépticas y su olor es efectiva contra la depresión y la fatiga.",
+    processDescripion: "",
+  },
+  {
+    title: "Lavanda",
+    imageSrc: "ingredient-lavanda.png",
+    resume:
+      "El aceite esencial de lavanda es un poderoso antiséptico con propiedades analgésicas, regeneradoras celulares y sedantes. Es útil para prevenir ampollas en quemaduras, regenerar tejidos, desinfectar heridas y aliviar el dolor en casos de reuma o artritis.",
+    processDescripion: "",
+  },
+];
+---
+
+<section id="ingredient" class="bg-saffron py-6">
+  <div class="mx-auto max-w-[60%] flex flex-col justify-center items-center gap-4">
+    {cardList.map((item) => <IngredientCard {...item} />)}
+  </div>
+</section>
+
+<style>
+  section {
+    background-image: linear-gradient(to bottom, rgb(241 187 10 ) 10%, transparent 95%), url('xocovi-background.png');
+    background-repeat: space repeat;
+    background-size: 10%;
+    background-position: 0 0 , 50% 0;
+  }
+</style>
