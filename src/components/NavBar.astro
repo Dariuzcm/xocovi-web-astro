@@ -1,4 +1,4 @@
-<nav class="w-full z-10 navbar h-16 bg-white">
+<nav class="w-full z-10 navbar h-16 bg-white show">
   <div class="flex">
     <img src="/xocovi-nav-icon.png" alt="" class="h-16 -top-0" />
     <ul
@@ -27,23 +27,36 @@
 <script>
   window.addEventListener("scroll", function () {
     const navbar = document.querySelector(".navbar");
-    const currentSection = document.elementFromPoint(
+    const element = document.elementFromPoint(
       window.innerWidth / 2,
       window.innerHeight / 2
     );
 
-    if (currentSection) {
-      if (currentSection!.id === "inicio") {
-        navbar!.classList.remove("show");
-      } else {
-        navbar!.classList.add("show");
-      }
-      if (currentSection!.tagName === "SECTION")
-        changeColorNavbar(currentSection!.id);
+    if (element) {
+      // if (currentSection!.id === "inicio") {
+      //   navbar!.classList.remove("show");
+      // } else {
+      //   navbar!.classList.add("show");
+      // }
+      // if (currentSection!.tagName === "SECTION")
+      const searchParent = searchParentSection(element)
+      changeColorNavbar(searchParent?.id);
     }
   });
 
-  function changeColorNavbar(sectionid: string) {
+  function searchParentSection(element: Element ) {
+    const { parentElement } = element
+    if(!parentElement) return undefined
+    if(parentElement.tagName === "SECTION"){
+      return parentElement
+    }
+    else {
+      return searchParentSection(parentElement)
+    }
+  }
+  function changeColorNavbar(sectionid: string | undefined) {
+    if(!sectionid) return;
+
     const selected = document.querySelector(`li[id='li-${sectionid}']`);
     const previousSelected = document.querySelector("li.active");
 
@@ -51,7 +64,7 @@
     selected?.classList.add("active");
   }
 
-  
+
 </script>
 
 <style>

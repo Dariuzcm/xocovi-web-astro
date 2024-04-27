@@ -1,28 +1,216 @@
-<!-- ---
-import EmblaCarousel from 'embla-carousel'
-
-const emblaNode = document.querySelector('.embla') || <div></div>
-const options = { loop: true }
-
-const emblaApi = EmblaCarousel(emblaNode , options)
-
 ---
-<div class="embla">
-  <div class="embla__container">
-    <div class="embla__slide">Slide 1</div>
-    <div class="embla__slide">Slide 2</div>
-    <div class="embla__slide">Slide 3</div>
+import ClientCard, { type ClientCardProps } from "./ClientCard.astro";
+import CaretRightIcon from "./Icons/CaretRightIcon.astro";
+
+export type CarrouselProps<T> = {
+  items: T[]
+  Component: any
+}
+const clientsCarrousel: ClientCardProps[] = [
+  {
+    title: "Aurora",
+    src: "/clients/aurora.jpg",
+    description:
+      '"Por mi tipo de piel cualquier golpe me genera moretón e inflamación, me      apliqué el bálsamo inmediatamente después del golpe y no hubo ni inflamación y moretón"',
+  },
+  {
+    title: "Joaquin",
+    src: "/clients/joaquin.jpg",
+    description:
+      '"Lo usé en la noche para mis rodillas y en la mañana había desaparecido completamente el dolor, no es grasoso y no mancha la ropa."',
+  },
+  {
+    title: "Ricardo",
+    src: "/clients/ricardo.jpg",
+    description:
+      '"Usé el balsamo Xocovi durante 3 dias, para desinflamar un golpe de rodilla, con excelentes resultados, recomendado 100%"',
+  },
+  {
+    title: "Nena",
+    src: "/clients/nena.jpg",
+    description:
+      '"Tenia un dolor de rodilla que no se me quitaba y usando el bálsamo desde el primer día mejoró mucho y al tercer día desapareció, lo recomiendo es un excelente bálsamo."',
+  },
+  {
+    title: "Evangelina",
+    src: "/clients/evangelina.jpg",
+    description:
+      '"En ciertos movimientos las articulaciones se alteran y este bálsamo me resultó magnífico, ya que a los 8 o 10 minutos después de aplicarlo en mi mano desapareció el dolor."',
+  },
+  {
+    title: "Erika",
+    src: "/clients/erika.jpg",
+    description:
+      '"Siendo instructor en los gimnasios pues termino con lesiones por el cansancio y el exceso de ejercicio.. pero llego a mi casa y me pongo esta maravilla de bálsamo y se me quitan todas mis lesiones de articulaciones.. realmente es un bálsamo maravilloso!!!..."',
+  },
+];
+---
+
+<div
+  class="h-screen flex flex-col gap-10 justify-center items-center content-center"
+>
+  <h1 class="font-extrabold text-3xl text-white drop-shadow-xl">
+    Nuestros Clientes Satisfechos
+  </h1>
+  <div id="carrousel-container">
+    {
+      clientsCarrousel.map((item, index) => (
+        <div data-index={index} class={"hidden carrousel-out"}>
+          <ClientCard {...item} />
+        </div>
+      ))
+    }
+  </div>
+  <div class="flex gap-6 items-center justify-center content-center">
+    <button id="previous" class="font-bold text-5xl rounded-full rotate-180 bg-white hover:bg-white-100 hover:text-forest_green-800">
+      <CaretRightIcon />
+    </button>
+    <div class="w-fit flex gap-6 p-3">
+      {
+        clientsCarrousel.map((_item, index) => (
+          <button
+            class="slider rounded-full size-5 bg-white-200"
+            data-button-index={index}
+          />
+        ))
+      }
+    </div>
+    <button id="next" class="font-bold text-5xl rounded-full bg-white hover:bg-white-100 hover:text-forest_green-800"
+      ><CaretRightIcon /></button
+    >
   </div>
 </div>
+
+<script>
+  ///---------- vars
+  const carrouselContainer = document.getElementById("carrousel-container");
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  let currentIndex = 0;
+  let pause = false;
+  const interval = 800;
+  /// .--------------Listeners
+
+  carrouselContainer?.addEventListener("mouseover", () => {
+    pause = true;
+  });
+  carrouselContainer?.addEventListener("mouseleave", () => {
+    pause = false;
+  });
+  previousButton?.addEventListener("click", () => prev());
+  nextButton?.addEventListener("click", () => next());
+  /// functions ----------------
+  function ActivateOut() {
+    const carrousel = document.querySelector("div.carrousel");
+    if (carrousel) {
+      carrousel.classList.remove("carrousel");
+      carrousel.classList.add("carrousel-out");
+      setTimeout(() => {
+        carrousel.classList.add("hidden");
+      }, interval);
+    }
+  }
+
+  function Activate(index: number) {
+    const carrousel = document.querySelector(`div[data-index="${index}"]`);
+    const otherButtons = document.getElementsByClassName("active-button");
+    const button = document.querySelector(
+      `button[data-button-index="${index}"]`
+    );
+
+    if (button && otherButtons) {
+      for (let other of otherButtons) {
+        other.classList.remove("bg-forest_green-600");
+        other.classList.remove("active-button");
+        other.classList.add("bg-white-200");
+      }
+      button.classList.remove("bg-white-200");
+      button.classList.add("bg-forest_green-600");
+      button.classList.add("active-button");
+    }
+    if (carrousel) {
+      carrousel.classList.remove("carrousel-out");
+      carrousel.classList.remove("hidden");
+      carrousel.classList.add("carrousel");
+    }
+  }
+
+  function incrementIndex() {
+    currentIndex++;
+    if (currentIndex > 5) currentIndex = 0;
+    return currentIndex;
+  }
+
+  function decrementIndex() {
+    currentIndex--;
+    if (currentIndex < 0) currentIndex = 5;
+    return currentIndex;
+  }
+
+  function next() {
+    ActivateOut();
+    incrementIndex();
+    setTimeout(() => {
+      Activate(currentIndex);
+    }, interval);
+  }
+
+  function prev() {
+    ActivateOut();
+    decrementIndex();
+    setTimeout(() => {
+      Activate(currentIndex);
+    }, interval);
+  }
+  Activate(currentIndex);
+  setInterval(() => {
+    if (!pause) {
+      next();
+    }
+  }, 6000);
+</script>
+
 <style>
-  .embla {
-    overflow: hidden;
+  button {
+    transition: all 300ms ease-in-out;
   }
-  .embla__container {
-    display: flex;
+  .carrousel {
+    transition:
+      opacity 0.3ms ease-in-out,
+      margin 1s ease-in;
+    animation-name: carrouselAnimationIn;
+    animation-duration: 500ms;
   }
-  .embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
+  .carrousel-container {
+    transition: margin 1s ease-in-out;
   }
-</style> -->
+  .carrousel-out {
+    transition:
+      opacity-margin 0.3ms ease-in-out,
+      margin 1s ease-in;
+    animation-name: carrouselAnimationOut;
+    animation-duration: 500ms;
+    opacity: 0;
+  }
+  @keyframes carrouselAnimationIn {
+    from {
+      opacity: 0;
+      margin-left: 200px;
+    }
+    to {
+      opacity: 1;
+      margin-left: inherit;
+    }
+  }
+
+  @keyframes carrouselAnimationOut {
+    from {
+      margin-right: inherit;
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      margin-right: 200px;
+    }
+  }
+</style>
