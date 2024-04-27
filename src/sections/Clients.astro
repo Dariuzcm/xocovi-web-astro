@@ -1,5 +1,51 @@
 ---
-import Carrousel from "../components/Carrousel.astro";
+import Carrousel, { type Props } from "../components/Carrousel.astro";
+import type { Props as ClientCardProps } from "../components/ClientCard.astro";
+import ClientCard from "../components/ClientCard.astro";
+
+const clientsCarrousel: ClientCardProps[] = [
+  {
+    title: "Aurora",
+    src: "/clients/aurora.jpg",
+    description:
+      '"Por mi tipo de piel cualquier golpe me genera moretón e inflamación, me      apliqué el bálsamo inmediatamente después del golpe y no hubo ni inflamación y moretón"',
+  },
+  {
+    title: "Joaquin",
+    src: "clients/joaquin.jpg",
+    description:
+      '"Lo usé en la noche para mis rodillas y en la mañana había desaparecido completamente el dolor, no es grasoso y no mancha la ropa."',
+  },
+  {
+    title: "Ricardo",
+    src: "/clients/ricardo.jpg",
+    description:
+      '"Usé el balsamo Xocovi durante 3 dias, para desinflamar un golpe de rodilla, con excelentes resultados, recomendado 100%"',
+  },
+  {
+    title: "Nena",
+    src: "/clients/nena.jpg",
+    description:
+      '"Tenia un dolor de rodilla que no se me quitaba y usando el bálsamo desde el primer día mejoró mucho y al tercer día desapareció, lo recomiendo es un excelente bálsamo."',
+  },
+  {
+    title: "Evangelina",
+    src: "/clients/evangelina.jpg",
+    description:
+      '"En ciertos movimientos las articulaciones se alteran y este bálsamo me resultó magnífico, ya que a los 8 o 10 minutos después de aplicarlo en mi mano desapareció el dolor."',
+  },
+  {
+    title: "Erika",
+    src: "/clients/erika.jpg",
+    description:
+      '"Siendo instructor en los gimnasios pues termino con lesiones por el cansancio y el exceso de ejercicio.. pero llego a mi casa y me pongo esta maravilla de bálsamo y se me quitan todas mis lesiones de articulaciones.. realmente es un bálsamo maravilloso!!!..."',
+  },
+];
+const carrouselItems: Props<ClientCardProps> = {
+  items: clientsCarrousel,
+  Component: ClientCard
+}
+
 ---
 
 <section id="contacto" class="h-screen">
@@ -9,7 +55,7 @@ import Carrousel from "../components/Carrousel.astro";
   <h1 class="font-extrabold text-3xl text-white drop-shadow-xl">
     Nuestros Clientes Satisfechos
   </h1>
-    <Carrousel />
+    <Carrousel {...carrouselItems} />
   </div>
 </section>
 

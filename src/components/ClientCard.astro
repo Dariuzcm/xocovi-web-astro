@@ -1,7 +1,7 @@
 ---
 import StarIcon from "./Icons/StarIcon.astro";
 
-export type ClientCardProps = {
+export interface Props {
   title: string;
   src: string;
   description: string;
@@ -52,6 +52,7 @@ function range(range: number = 5) {
   }
   img {
     width: 9rem;
+    height: 9rem;
     border-radius: 100%;
   }
 </style>

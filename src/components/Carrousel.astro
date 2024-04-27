@@ -1,104 +1,73 @@
 ---
-import ClientCard, { type ClientCardProps } from "./ClientCard.astro";
 import CaretRightIcon from "./Icons/CaretRightIcon.astro";
 
-export type CarrouselProps<T> = {
-  items: T[]
-  Component: any
+export interface Props<T> {
+  items: T[];
+  Component: any;
 }
-const clientsCarrousel: ClientCardProps[] = [
-  {
-    title: "Aurora",
-    src: "/clients/aurora.jpg",
-    description:
-      '"Por mi tipo de piel cualquier golpe me genera moretón e inflamación, me      apliqué el bálsamo inmediatamente después del golpe y no hubo ni inflamación y moretón"',
-  },
-  {
-    title: "Joaquin",
-    src: "/clients/joaquin.jpg",
-    description:
-      '"Lo usé en la noche para mis rodillas y en la mañana había desaparecido completamente el dolor, no es grasoso y no mancha la ropa."',
-  },
-  {
-    title: "Ricardo",
-    src: "/clients/ricardo.jpg",
-    description:
-      '"Usé el balsamo Xocovi durante 3 dias, para desinflamar un golpe de rodilla, con excelentes resultados, recomendado 100%"',
-  },
-  {
-    title: "Nena",
-    src: "/clients/nena.jpg",
-    description:
-      '"Tenia un dolor de rodilla que no se me quitaba y usando el bálsamo desde el primer día mejoró mucho y al tercer día desapareció, lo recomiendo es un excelente bálsamo."',
-  },
-  {
-    title: "Evangelina",
-    src: "/clients/evangelina.jpg",
-    description:
-      '"En ciertos movimientos las articulaciones se alteran y este bálsamo me resultó magnífico, ya que a los 8 o 10 minutos después de aplicarlo en mi mano desapareció el dolor."',
-  },
-  {
-    title: "Erika",
-    src: "/clients/erika.jpg",
-    description:
-      '"Siendo instructor en los gimnasios pues termino con lesiones por el cansancio y el exceso de ejercicio.. pero llego a mi casa y me pongo esta maravilla de bálsamo y se me quitan todas mis lesiones de articulaciones.. realmente es un bálsamo maravilloso!!!..."',
-  },
-];
+
+const { items, Component } = Astro.props;
 ---
 
-<div
-  class="h-screen flex flex-col gap-10 justify-center items-center content-center"
->
-  <h1 class="font-extrabold text-3xl text-white drop-shadow-xl">
-    Nuestros Clientes Satisfechos
-  </h1>
-  <div id="carrousel-container">
+<div id="carrousel-container">
+  {
+    items.map((item: astroHTML.JSX.IntrinsicAttributes, index: any) => (
+      <div data-index={index} class={"hidden carrousel-out"}>
+        <Component {...item} />
+      </div>
+    ))
+  }
+</div>
+<div class="flex gap-6 items-center justify-center content-center">
+  <button
+    id="previous"
+    class="font-bold text-5xl rounded-full rotate-180 bg-white hover:bg-white-100 hover:text-forest_green-800"
+  >
+    <CaretRightIcon />
+  </button>
+  <div class="w-fit flex gap-6 p-3">
     {
-      clientsCarrousel.map((item, index) => (
-        <div data-index={index} class={"hidden carrousel-out"}>
-          <ClientCard {...item} />
-        </div>
+      items.map((_item: any, index: number) => (
+        <button
+          class="slider rounded-full size-4 bg-white-200"
+          onclick={`selectItem(${index})`}
+          data-button-index={index}
+        />
       ))
     }
   </div>
-  <div class="flex gap-6 items-center justify-center content-center">
-    <button id="previous" class="font-bold text-5xl rounded-full rotate-180 bg-white hover:bg-white-100 hover:text-forest_green-800">
-      <CaretRightIcon />
-    </button>
-    <div class="w-fit flex gap-6 p-3">
-      {
-        clientsCarrousel.map((_item, index) => (
-          <button
-            class="slider rounded-full size-5 bg-white-200"
-            data-button-index={index}
-          />
-        ))
-      }
-    </div>
-    <button id="next" class="font-bold text-5xl rounded-full bg-white hover:bg-white-100 hover:text-forest_green-800"
-      ><CaretRightIcon /></button
-    >
-  </div>
+  <button
+    id="next"
+    class="font-bold text-5xl rounded-full bg-white hover:bg-white-100 hover:text-forest_green-800"
+    ><CaretRightIcon /></button
+  >
 </div>
 
 <script>
+  import { slide } from "astro:transitions";
+
   ///---------- vars
   const carrouselContainer = document.getElementById("carrousel-container");
   const previousButton = document.getElementById("previous");
   const nextButton = document.getElementById("next");
+  const sliderButtons = document.getElementsByClassName("slider");
+
   let currentIndex = 0;
   let pause = false;
   const interval = 800;
-  /// .--------------Listeners
+  let intervalId: number;
 
-  carrouselContainer?.addEventListener("mouseover", () => {
-    pause = true;
-  });
-  carrouselContainer?.addEventListener("mouseleave", () => {
-    pause = false;
-  });
+  /// --------------Listeners
+
+  carrouselContainer?.addEventListener("mouseover", () => pause = true );
+  carrouselContainer?.addEventListener("mouseleave", () => pause = false );
   previousButton?.addEventListener("click", () => prev());
   nextButton?.addEventListener("click", () => next());
+
+  for (let index = 0; index < sliderButtons.length; index++) {
+    sliderButtons[index].addEventListener("click", () => selectItem(index));
+  }
+
   /// functions ----------------
   function ActivateOut() {
     const carrousel = document.querySelector("div.carrousel");
@@ -148,6 +117,7 @@ const clientsCarrousel: ClientCardProps[] = [
   }
 
   function next() {
+    SetInterval(intervalId);
     ActivateOut();
     incrementIndex();
     setTimeout(() => {
@@ -156,18 +126,33 @@ const clientsCarrousel: ClientCardProps[] = [
   }
 
   function prev() {
+    SetInterval(intervalId);
     ActivateOut();
     decrementIndex();
     setTimeout(() => {
       Activate(currentIndex);
     }, interval);
   }
+
+  function selectItem(index: number) {
+    SetInterval(intervalId);
+    ActivateOut();
+    currentIndex = index;
+    setTimeout(() => {
+      Activate(currentIndex);
+    }, interval);
+  }
+
   Activate(currentIndex);
-  setInterval(() => {
-    if (!pause) {
-      next();
-    }
-  }, 6000);
+  SetInterval();
+  function SetInterval(inter?: number) {
+    clearInterval(inter);
+    intervalId = setInterval(() => {
+      if (!pause) {
+        next();
+      }
+    }, 6000);
+  }
 </script>
 
 <style>
