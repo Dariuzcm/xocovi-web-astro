@@ -21,7 +21,7 @@ const { items, Component } = Astro.props;
 <div class="flex gap-6 items-center justify-center content-center">
   <button
     id="previous"
-    class="font-bold text-5xl rounded-full rotate-180 bg-white hover:bg-white-100 hover:text-forest_green-800"
+    class="font-bold text-5xl rounded-full rotate-180 bg-white hover:bg-saffron hover:text-white active:bg-saffron-700"
   >
     <CaretRightIcon />
   </button>
@@ -29,7 +29,7 @@ const { items, Component } = Astro.props;
     {
       items.map((_item: any, index: number) => (
         <button
-          class="slider rounded-full size-4 bg-white-200"
+          class="slider rounded-full size-4 bg-white-400 active:bg-saffron-800"
           onclick={`selectItem(${index})`}
           data-button-index={index}
         />
@@ -38,7 +38,7 @@ const { items, Component } = Astro.props;
   </div>
   <button
     id="next"
-    class="font-bold text-5xl rounded-full bg-white hover:bg-white-100 hover:text-forest_green-800"
+    class="font-bold text-5xl rounded-full bg-white hover:bg-saffron hover:text-white active:bg-saffron-700"
     ><CaretRightIcon /></button
   >
 </div>
@@ -89,12 +89,12 @@ const { items, Component } = Astro.props;
 
     if (button && otherButtons) {
       for (let other of otherButtons) {
-        other.classList.remove("bg-forest_green-600");
+        other.classList.remove("bg-saffron");
         other.classList.remove("active-button");
-        other.classList.add("bg-white-200");
+        other.classList.add("bg-white-400");
       }
-      button.classList.remove("bg-white-200");
-      button.classList.add("bg-forest_green-600");
+      button.classList.remove("bg-white-400");
+      button.classList.add("bg-saffron");
       button.classList.add("active-button");
     }
     if (carrousel) {
