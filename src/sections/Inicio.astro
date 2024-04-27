@@ -1,15 +1,9 @@
-<section class="h-screen max-h-screen" id="inicio">
-  <img
-    id="inicio"
-    src="/indexbg.png"
-    class="index-bg h-full"
-    alt="imagen de flores de inicio"
-  />
+<section class="md:h-screen md:max-h-screen" id="inicio">
   <div
-    class="absolute max-w-[40%] right-6 justify-center items-center content-center h-full gap-6 flex flex-col mx-5"
+    class="md:absolute md:max-w-[40%] md:right-6 justify-center items-center content-center h-full gap-6 flex flex-col md:mx-5 py-4"
   >
     <img src="/xocovi-nocontent.png" alt="xocovi full logo" class="w-[80%]" />
-    <p class="text-2xl px-6">
+    <p class="text-2xl p-6 bg-white bg-opacity-80 mx-5 md:bg-transparent rounded-lg shadow-lg md:shadow-none">
       ¡Descubre el compromiso de XOCOVI con la salud y el bienestar personal! A
       través de nuestros productos, respetamos el medio ambiente y aprovechamos
       al máximo los beneficios de los recursos naturales y nuestro entorno
@@ -18,12 +12,11 @@
     </p>
   </div>
   <style>
-    .index-bg {
-      mask-image: linear-gradient(to left, black 50%, transparent 75%);
-      float: left;
-      object-fit: cover;
-      transform: rotateY(180deg);
-      background-attachment: fixed;
+    #inicio {
+      background-image: url('indexbg.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      
     }
     div p {
       font-size: 1.5rem;

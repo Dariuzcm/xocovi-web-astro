@@ -6,7 +6,7 @@ export interface Props {
   src: string;
   description: string;
   rangeStars?: number;
-};
+}
 
 const { title, src, description, rangeStars } = Astro.props;
 function range(range: number = 5) {
@@ -18,17 +18,23 @@ function range(range: number = 5) {
 }
 ---
 
-<div class="card bg-white rounded-3xl shadow-2xl p-5">
+<div
+  class:list={[
+    "md:h-[400px]",
+    "md:w-[700px]",
+    "bg-white",
+    "rounded-3xl",
+    "shadow-2xl",
+    "md:p-10 p-4",
+  ]}
+>
   <div class="w-full rounded-t-3xl flex h-fit content-center pb-8 gap-8">
-    <img
-      src={src}
-      class="border-4 border-solid border-red_violet"
-    />
+    <img src={src} class="border-4 border-solid border-red_violet" />
     <div class="content-center items-center flex flex-col my-auto">
       <h1 class="font-bold text-5xl pb-3">{title}</h1>
       <div class="flex">
         {
-          range(rangeStars).map((item) => (
+          range(rangeStars).map((_item) => (
             <>
               <StarIcon />
             </>
@@ -38,18 +44,13 @@ function range(range: number = 5) {
     </div>
   </div>
   <div class="h-auto content-center">
-    <p class="text-xl italic">
+    <p class="text-xl italic md:w-auto w-[380px]">
       {description}
     </p>
   </div>
 </div>
 
 <style>
-  .card {
-    width: 700px;
-    height: 400px;
-    padding: 3rem;
-  }
   img {
     width: 9rem;
     height: 9rem;

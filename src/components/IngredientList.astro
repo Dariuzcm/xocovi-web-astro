@@ -42,7 +42,7 @@ const cardList: IngredientCardProps[] = [
 ---
 
 <section id="ingredients" class="bg-saffron py-6">
-  <div class="mx-auto max-w-[60%] flex flex-col justify-center items-center gap-4">
+  <div class="mx-auto md:max-w-[60%] flex flex-col justify-center items-center gap-4">
     {cardList.map((item) => <IngredientCard {...item} />)}
   </div>
 </section>
@@ -51,7 +51,7 @@ const cardList: IngredientCardProps[] = [
   section {
     background-image: linear-gradient(to bottom, rgb(241 187 10 ) 10%, transparent 95%), url('xocovi-background.png');
     background-repeat: space repeat;
-    background-size: 10%;
+    background-size: 12rem;
     background-position: 0 0 , 50% 0;
   }
 </style>

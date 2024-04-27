@@ -63,8 +63,9 @@ export default {
         700: '#f9d769',
         800: '#fbe59b',
         900: '#fdf2cd' 
-      } 
-    }
+      },
+      'transparent': "transparent"
+    },
   },
   plugins: [],
 }

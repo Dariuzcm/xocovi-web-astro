@@ -48,9 +48,9 @@ const carrouselItems: Props<ClientCardProps> = {
 
 ---
 
-<section id="clients" class="h-screen">
+<section id="clients" class="h-screen w-screen overflow-hidden">
   <div
-  class="h-screen flex flex-col gap-10 justify-center items-center content-center"
+  class="h-screen flex flex-col gap-10 justify-center items-center content-center overflow-hidden w-screen"
 >
   <h1 class="font-extrabold text-3xl text-white drop-shadow-xl">
     Nuestros Clientes Satisfechos
@@ -64,5 +64,7 @@ const carrouselItems: Props<ClientCardProps> = {
     background-image: url('mosaico.webp');
     background-repeat: no-repeat;
     background-size: cover;
+    overflow-y: hidden;
+    width: 100%;
   }
 </style>

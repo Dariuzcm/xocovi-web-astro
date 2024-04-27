@@ -1,4 +1,8 @@
-<nav class="w-full z-10 navbar h-16 bg-white show">
+---
+import MenuIcon from "./Icons/MenuIcon.astro";
+---
+
+<nav class="w-full z-10 navbar h-16 bg-white show hidden md:block items-center">
   <div class="flex">
     <img src="/xocovi-nav-icon.png" alt="" class="h-16 -top-0" />
     <ul
@@ -26,22 +30,37 @@
     </ul>
   </div>
 </nav>
+<nav class="navbar h-14 show w-full bg-white">
+  <div class="flex justify-between items-center">
+    <button id="menu-icon">
+      <MenuIcon />
+    </button>
+    <img src="/xocovi-nav-icon.png" alt="" class="h-14 -top-0" />
+  </div>
+</nav>
+<dialog id="menu-dialog" open={false} class="bg-white w-full h-full opacity-90 top-14 fixed z-10">
+
+</dialog>
+<script>
+  const menuButton = document.getElementById('menu-icon')
+  menuButton?.addEventListener('click', toggleMenu)
+  const menuDialog = document.getElementById('menu-dialog') as astroHTML.JSX.DialogHTMLAttributes | null
+  function toggleMenu(){
+    if(menuDialog){
+    const isOpen = menuDialog?.open
+    menuDialog.open = !isOpen
+  }
+  }
+</script>
 
 <script>
   window.addEventListener("scroll", function () {
-    const navbar = document.querySelector(".navbar");
     const element = document.elementFromPoint(
       window.innerWidth / 2,
       window.innerHeight / 2
     );
 
     if (element) {
-      // if (currentSection!.id === "inicio") {
-      //   navbar!.classList.remove("show");
-      // } else {
-      //   navbar!.classList.add("show");
-      // }
-      // if (currentSection!.tagName === "SECTION")
       const searchParent = searchParentSection(element)
       changeColorNavbar(searchParent?.id);
     }

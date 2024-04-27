@@ -9,7 +9,7 @@ export interface Props<T> {
 const { items, Component } = Astro.props;
 ---
 
-<div id="carrousel-container">
+<div id="carrousel-container relative h-[90%] w-full overflow-hidden">
   {
     items.map((item: astroHTML.JSX.IntrinsicAttributes, index: any) => (
       <div data-index={index} class={"hidden carrousel-out"}>
@@ -21,7 +21,16 @@ const { items, Component } = Astro.props;
 <div class="flex gap-6 items-center justify-center content-center">
   <button
     id="previous"
-    class="font-bold text-5xl rounded-full rotate-180 bg-white hover:bg-saffron hover:text-white active:bg-saffron-700"
+    class:list={[
+      "font-bold",
+      "text-5xl",
+      "rounded-full",
+      "rotate-180",
+      "bg-white",
+      "hover:bg-saffron",
+      "hover:text-white",
+      "active:bg-saffron-700",
+    ]}
   >
     <CaretRightIcon />
   </button>
@@ -29,7 +38,15 @@ const { items, Component } = Astro.props;
     {
       items.map((_item: any, index: number) => (
         <button
-          class="slider rounded-full size-4 bg-white-400 active:bg-saffron-800"
+          class="border-[2px] border-solid shadow-md shadow-white-200"
+          class:list={[
+            "slider",
+            "rounded-full",
+            "size-4",
+            "bg-white-400",
+            "active:bg-saffron-800",
+            "border-white-300",
+          ]}
           onclick={`selectItem(${index})`}
           data-button-index={index}
         />
@@ -44,8 +61,6 @@ const { items, Component } = Astro.props;
 </div>
 
 <script>
-  import { slide } from "astro:transitions";
-
   ///---------- vars
   const carrouselContainer = document.getElementById("carrousel-container");
   const previousButton = document.getElementById("previous");
@@ -59,8 +74,8 @@ const { items, Component } = Astro.props;
 
   /// --------------Listeners
 
-  carrouselContainer?.addEventListener("mouseover", () => pause = true );
-  carrouselContainer?.addEventListener("mouseleave", () => pause = false );
+  carrouselContainer?.addEventListener("mouseover", () => (pause = true));
+  carrouselContainer?.addEventListener("mouseleave", () => (pause = false));
   previousButton?.addEventListener("click", () => prev());
   nextButton?.addEventListener("click", () => next());
 
@@ -168,6 +183,9 @@ const { items, Component } = Astro.props;
   }
   .carrousel-container {
     transition: margin 1s ease-in-out;
+    overflow-y: hidden;
+    width: 100%;
+    height: auto;
   }
   .carrousel-out {
     transition:
