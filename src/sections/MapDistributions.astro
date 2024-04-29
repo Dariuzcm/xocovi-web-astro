@@ -7,19 +7,42 @@
     max-height: 500px;
     height: 100%;
   }
+
+section {
+  
+  background: linear-gradient(to bottom, #f1bb0a, white )
+  
+}
+
 </style>
-<div id="map" class="rounded-lg m-6 shadow-lg"></div>
+<section class="h-screen content-center">
+  <h1 class="text-center font-extrabold text-3xl text-white drop-shadow-xl p-5 shadowed">Nuestos centros de Distribución</h1>
+  <div id="map" class="rounded-lg m-6 shadow-lg"></div>
+</section>
 <script
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
   crossorigin="*"></script>
 <script>
-  var map = L.map("map").setView([24.018937, -104.661691], 13);
+
+
+  var map = L.map("map").setView([24.018937, -104.661691], 15);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
 
-  var marker = L.marker([24.036288, -104.653250]).addTo(map);
+  let lat, long;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      lat = position.coords.latitude
+      long = position.coords.longitude
+      L.marker([lat, long]).addTo(map)
+    });
+  }
+
+  L.marker([24.036288, -104.65325]).addTo(map);
+
+  
 </script>

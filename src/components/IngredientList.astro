@@ -42,6 +42,8 @@ const cardList: IngredientCardProps[] = [
 ---
 
 <section id="ingredients" class="bg-saffron py-6">
+  <h1 class="shadowed text-3xl font-semibold text-white text-center p-9">Ingredientes</h1>
+
   <div class="mx-auto lg:max-w-[70%] flex flex-col justify-center items-center gap-4">
     {cardList.map((item) => <IngredientCard {...item} />)}
   </div>
