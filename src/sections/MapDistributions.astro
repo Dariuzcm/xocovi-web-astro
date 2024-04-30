@@ -1,17 +1,27 @@
 <style>
   @import url("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
 
-
-section {
-  
-  background: linear-gradient(to bottom, #f1bb0a, white )
-  
-}
-
+  section {
+    background: linear-gradient(to bottom, #f1bb0a, white);
+  }
 </style>
-<section id="puntos-venta" class="h-screen content-center">
-  <h1 class="text-center font-extrabold text-3xl text-white drop-shadow-xl p-5 shadowed">Puntos de venta</h1>
-  <div id="map" class="rounded-lg m-6 shadow-lg w-11/12 h-2/3 md:w-1/2 md:mx-auto md:min-h-[400px] md:max-h-[500px]"></div>
+<section id="puntos-venta" class="h-auto content-center">
+  <h1
+    class="text-center font-extrabold text-3xl text-white drop-shadow-xl p-5 shadowed"
+  >
+    Puntos de venta
+  </h1>
+  <div
+    id="map"
+    class="rounded-lg m-6 shadow-lg w-11/12 h-2/3 md:w-2/3 lg:w-1/2 md:mx-auto min-h-[400px] md:max-h-[500px]"
+  >
+  </div>
+  <h1 class="m-6 text-xl font-semibold">Puntos de venta</h1>
+  <div
+    id="markers-link-container"
+    class="grid grid-cols-2 md:grid-cols-4 md:grid-flow-col gap-3 m-6 md:grid-rows-4 grid-rows-12"
+  >
+  </div>
 </section>
 <script
   is:inline
@@ -20,23 +30,131 @@ section {
   crossorigin="*"></script>
 <script>
   // @ts-nocheck
-  var map = L.map("map").setView([24.018937, -104.661691], 15);
+  var lat, long;
+  const markersLinkContainer = document.getElementById(
+    "markers-link-container"
+  );
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      lat = position.coords.latitude;
+      long = position.coords.longitude;
+    });
+  }
+
+  var map = L.map("map").setView([lat || 24.018937, long || -104.661691], 14);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
 
-  let lat, long;
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      lat = position.coords.latitude
-      long = position.coords.longitude
-      L.marker([lat, long]).addTo(map)
-    });
+  const markers = [
+    {
+      state: "Cuencame",
+      coords: [24.8731588, -103.6988268],
+      title: "Farmacia Isis",
+    }, //Farmacia Isis
+    {
+      state: "Cuencame",
+      coords: [24.8739564, -103.7004414],
+      title: "Farmacia Fenix",
+    }, //Farmacia Fenix
+    {
+      state: "Peñón Blanco",
+      coords: [24.7929959, -104.0294572],
+      title: "Tienda naturizta el peñón",
+    }, //Tienda naturizta el peñón
+    {
+      state: "Guadalupe Victoria",
+      coords: [24.4468502, -104.1199268],
+      title: "Farmacia de los llanos 1",
+    }, //Farmacia de los llanos 1
+    {
+      state: "Guadalupe Victoria",
+      coords: [24.4476294, -104.1235169],
+      title: "Farmacia de los llanos 2",
+    }, //Farmacia de los llanos 2
+    {
+      state: "Guadalupe Victoria",
+      coords: [24.4441118, -104.1211309],
+      title: "Farmacia Zamar 1",
+    }, //Farmacia Zamar 1
+    {
+      state: "Francisco I. Madero",
+      coords: [24.4043453, -104.3166439],
+      title: "Miscelanea el pedregal",
+    }, //Miscelanea el pedregal
+    {
+      state: "Francisco I. Madero",
+      coords: [24.3990707, -104.3236054],
+      title: "Miscelanea Kristal",
+    }, //Miscelanea Kristal
+    {
+      state: "Durango",
+      coords: [24.0132702, -104.6377931],
+      title: "Miscelanea Los Changos",
+    }, //Miscelanea Los Changos
+    {
+      state: "Durango",
+      coords: [24.030117, -104.6456934],
+      title: "Hotel Best Western",
+    }, //Hotel Best Western
+    {
+      state: "Durango",
+      coords: [24.0289901, -104.6504929],
+      title: "Clinica de medicina tradicional china",
+    }, //Clinica de medicina tradicional china
+    {
+      state: "Durango",
+      coords: [24.0241817, -104.6733577],
+      title: "Cafetería la chabela",
+    }, //Cafetería la chabela
+    {
+      state: "Durango",
+      coords: [24.0249935, -104.6550049],
+      title: "Conexus 1",
+    }, //Conexus 1
+    {
+      state: "Durango",
+      coords: [24.0095328, -104.7095952],
+      title: "Conexus 2",
+    }, //Conexus 2
+    {
+      state: "Durango",
+      coords: [24.041571, -104.6636616],
+      title: "Paleteria la michoacana y algo mas",
+    }, //Paleteria la michoacana y algo mas
+    {
+      state: "Durango",
+      coords: [24.0264942, -104.6484457],
+      title: "Distribuidora especializada Médica",
+    }, //Distribuidora especializada Médica
+  ];
+
+  function onClickMarkerAncor(index: number) {
+    const marker = markers[index];
+    map.setView(marker.coords, 17);
+    
   }
 
-  L.marker([24.036288, -104.65325]).addTo(map);
+  for (let i = 0; i < markers.length; i++) {
+    const mark = markers[i];
+    L.marker(mark.coords, {
+      title: mark.title,
+      alt: mark.title,
+      zIndexOffset: 99,
+    })
+      .bindTooltip(mark.title)
+      .addTo(map);
 
-  
+    const ancor = document.createElement("a");
+    const index = markers.indexOf(mark);
+
+    ancor.innerText = `${mark.title}, ${mark.state}`;
+    ancor.className = 'hover:bg-white hover:shadow-lg rounded-lg max-w-fit p-3 active:bg-saffron transition'
+    ancor.href ='#puntos-venta'
+    ancor.addEventListener("click", () => onClickMarkerAncor(index));
+    markersLinkContainer?.appendChild(ancor);
+  }
 </script>
