@@ -2,7 +2,9 @@
 import MenuIcon from "./Icons/MenuIcon.astro";
 ---
 
-<nav class="w-full z-[99999] navbar h-16 bg-white show hidden md:block items-center">
+<nav
+  class="w-full z-[99999] navbar h-16 bg-white show hidden md:block items-center"
+>
   <div class="flex">
     <img src="/xocovi-nav-icon.png" alt="" class="h-16 -top-0" />
     <ul
@@ -10,27 +12,27 @@ import MenuIcon from "./Icons/MenuIcon.astro";
       class="flex justify-between gap-10 lg:text-2xl md:text-md font-semibold h-16 p-3 right-10 absolute"
     >
       <li id="li-inicio">
-        <a href='#inicio'>Inicio</a>
+        <a href="#inicio">Inicio</a>
       </li>
       <li id="li-producto">
-        <a href='#producto'>Producto</a>
+        <a href="#producto">Producto</a>
       </li>
       <li id="li-ingredients">
-        <a href='#ingredients'>Ingredientes</a>
+        <a href="#ingredients">Ingredientes</a>
       </li>
       <li id="li-clients">
-        <a href='#clients'>Clientes</a>
-      </li>
-      <li id="li-contacto">
-        <a href='#contacto'>Contacto</a>
+        <a href="#clients">Clientes</a>
       </li>
       <li id="li-puntos-venta">
-        <a href='#puntos-venta'>Puntos de venta</a>
+        <a href="#puntos-venta">Puntos de venta</a>
+      </li>
+      <li id="li-contacto">
+        <a href="#contacto">Contacto</a>
       </li>
     </ul>
   </div>
 </nav>
-<nav class="navbar h-14 show w-full bg-white">
+<nav class="navbar h-14 show w-full bg-white z-[9999]">
   <div class="flex justify-between items-center">
     <button id="menu-icon">
       <MenuIcon />
@@ -38,19 +40,65 @@ import MenuIcon from "./Icons/MenuIcon.astro";
     <img src="/xocovi-nav-icon.png" alt="" class="h-14 -top-0" />
   </div>
 </nav>
-<dialog id="menu-dialog" open={false} class="bg-white w-full h-full opacity-90 top-14 fixed z-10">
 
+<dialog id="menu-dialog" class="bg-white w-full h-full fixed z-[99999] bg-gradient-to-b from-white to-saffron">
+  <ul
+    id="nav-min-buttons"
+    class="flex flex-col justify-between gap-10 text-2xl font-semibold h-16 p-3 text-center"
+  >
+    <li id="li-inicio">
+      <a href="#inicio">Inicio</a>
+    </li>
+    <li id="li-producto">
+      <a href="#producto">Producto</a>
+    </li>
+    <li id="li-ingredients">
+      <a href="#ingredients">Ingredientes</a>
+    </li>
+    <li id="li-clients">
+      <a href="#clients">Clientes</a>
+    </li>
+    <li id="li-puntos-venta">
+      <a href="#puntos-venta">Puntos de venta</a>
+    </li>
+    <li id="li-contacto">
+      <a href="#contacto">Contacto</a>
+    </li>
+  </ul>
 </dialog>
+
 <script>
-  const menuButton = document.getElementById('menu-icon')
-  menuButton?.addEventListener('click', toggleMenu)
-  const menuDialog = document.getElementById('menu-dialog') as astroHTML.JSX.DialogHTMLAttributes | null
-  function toggleMenu(){
-    if(menuDialog){
-    const isOpen = menuDialog?.open
-    menuDialog.open = !isOpen
+  const menuButton = document.getElementById("menu-icon");
+  const menuDialog = document.getElementById("menu-dialog");
+
+  menuButton?.addEventListener("click", toggleMenu);
+
+  function toggleMenu() {
+    if (menuDialog) {
+      const isOpen = menuDialog?.open as boolean;
+      setTimeout(() => {
+        if (!isOpen) {
+          menuDialog.classList.remove("dialog-inactive");
+          menuDialog.classList.add("dialog-active");
+        } else {
+          menuDialog.classList.remove("dialog-active");
+          menuDialog.classList.add("dialog-inactive");
+        }
+      }, 200);
+      if (isOpen) {
+        setTimeout(() => {
+          menuDialog.open = !isOpen;
+        }, 400);
+      } else {
+        menuDialog.open = !isOpen;
+      }
+    }
   }
-  }
+  const navButtonList = document.getElementById("nav-min-buttons")?.children;
+  if (navButtonList)
+    for (let element of navButtonList) {
+      element.addEventListener("click", toggleMenu);
+    }
 </script>
 
 <script>
@@ -61,23 +109,24 @@ import MenuIcon from "./Icons/MenuIcon.astro";
     );
 
     if (element) {
-      const searchParent = searchParentSection(element)
+      const searchParent = searchParentSection(element);
       changeColorNavbar(searchParent?.id);
     }
   });
 
-  function searchParentSection(element: Element ) {
-    const { parentElement } = element
-    if(!parentElement) return undefined
-    if(parentElement.tagName === "SECTION"){
-      return parentElement
-    }
-    else {
-      return searchParentSection(parentElement)
+  function searchParentSection(element: Element) {
+    if (element.tagName === "SECTION") return element;
+
+    const { parentElement } = element;
+    if (!parentElement) return undefined;
+    if (parentElement.tagName === "SECTION") {
+      return parentElement;
+    } else {
+      return searchParentSection(parentElement);
     }
   }
   function changeColorNavbar(sectionid: string | undefined) {
-    if(!sectionid) return;
+    if (!sectionid) return;
 
     const selected = document.querySelector(`li[id='li-${sectionid}']`);
     const previousSelected = document.querySelector("li.active");
@@ -85,8 +134,6 @@ import MenuIcon from "./Icons/MenuIcon.astro";
     previousSelected?.classList.remove("active");
     selected?.classList.add("active");
   }
-
-
 </script>
 
 <style>
@@ -115,6 +162,19 @@ import MenuIcon from "./Icons/MenuIcon.astro";
     transform: translateY(0);
   }
   html {
-  scroll-behavior: smooth;
-}
+    scroll-behavior: smooth;
+  }
+  dialog {
+    top: 3.5rem;
+    opacity: 0.9;
+    transform: translate(-100%, 0);
+    transition: all 300ms ease-in-out;
+  }
+
+  .dialog-active {
+    transform: translate(0, 0);
+  }
+  .dialog-inactive {
+    transform: translate(-100%, 0);
+  }
 </style>

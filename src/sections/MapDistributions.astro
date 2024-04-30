@@ -1,12 +1,6 @@
 <style>
   @import url("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
-  #map {
-    margin: 0 auto;
-    width: 50%;
-    min-height: 400px;
-    max-height: 500px;
-    height: 100%;
-  }
+
 
 section {
   
@@ -15,9 +9,9 @@ section {
 }
 
 </style>
-<section class="h-screen content-center">
-  <h1 class="text-center font-extrabold text-3xl text-white drop-shadow-xl p-5 shadowed">Nuestos centros de Distribución</h1>
-  <div id="map" class="rounded-lg m-6 shadow-lg"></div>
+<section id="puntos-venta" class="h-screen content-center">
+  <h1 class="text-center font-extrabold text-3xl text-white drop-shadow-xl p-5 shadowed">Puntos de venta</h1>
+  <div id="map" class="rounded-lg m-6 shadow-lg w-11/12 h-2/3 md:w-1/2 md:mx-auto md:min-h-[400px] md:max-h-[500px]"></div>
 </section>
 <script
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -35,7 +29,7 @@ section {
 
   let lat, long;
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition((position) => {
       lat = position.coords.latitude
       long = position.coords.longitude
       L.marker([lat, long]).addTo(map)
