@@ -68,13 +68,14 @@ import MenuIcon from "./Icons/MenuIcon.astro";
 </dialog>
 
 <script>
-  const menuButton = document.getElementById("menu-icon");
-  const menuDialog = document.getElementById("menu-dialog");
+  const menuButton = document.getElementById("menu-icon")
+  const menuDialog = document.getElementById("menu-dialog") as HTMLElement & { open: boolean }
 
   menuButton?.addEventListener("click", toggleMenu);
 
   function toggleMenu() {
     if (menuDialog) {
+      
       const isOpen = menuDialog?.open as boolean;
       setTimeout(() => {
         if (!isOpen) {

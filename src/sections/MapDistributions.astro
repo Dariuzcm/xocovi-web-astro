@@ -14,12 +14,12 @@ section {
   <div id="map" class="rounded-lg m-6 shadow-lg w-11/12 h-2/3 md:w-1/2 md:mx-auto md:min-h-[400px] md:max-h-[500px]"></div>
 </section>
 <script
+  is:inline
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
   crossorigin="*"></script>
 <script>
-
-
+  // @ts-nocheck
   var map = L.map("map").setView([24.018937, -104.661691], 15);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
