@@ -41,19 +41,23 @@ const cardList: IngredientCardProps[] = [
 ];
 ---
 
-<section id="ingredients" class="bg-saffron py-6">
-  <h1 class="shadowed text-3xl font-semibold text-white text-center p-9">Ingredientes</h1>
+<section id="ingredients" class="bg-saffron py-6 xocovi-image">
+  <h1 class="shadowed text-3xl font-semibold text-white text-center p-9">
+    Ingredientes
+  </h1>
 
-  <div class="mx-auto lg:max-w-[70%] flex flex-col justify-center items-center gap-4">
+  <div
+    class="mx-auto lg:max-w-[70%] flex flex-col justify-center items-center gap-4"
+  >
     {cardList.map((item) => <IngredientCard {...item} />)}
   </div>
 </section>
 
 <style>
-  section {
-    background-image: linear-gradient(to bottom, rgb(241 187 10 ) 10%, transparent 95%), url('/xocovi-background.png');
-    background-repeat: space repeat;
+  .xocovi-image {
+    background-image: linear-gradient(to bottom, rgb(241 187 10 ) 10%, transparent 95%), url('/xocovi-background.png'); 
+    /* background-image: url("/xocovi-background.png"); */
+    background-repeat: repeat space;
     background-size: 12rem;
-    background-position: 0 0 , 50% 0;
   }
 </style>
