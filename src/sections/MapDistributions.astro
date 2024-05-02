@@ -13,13 +13,13 @@
   </h1>
   <div
     id="map"
-    class="rounded-lg m-6 shadow-lg w-11/12 h-2/3 md:w-2/3 lg:w-1/2 md:mx-auto min-h-[400px] md:max-h-[500px]"
+    class="rounded-lg m-6 shadow-lg w-11/12 h-3/4 md:w-2/3 lg:w-1/2 md:mx-auto min-h-[400px] md:max-h-[600px]"
   >
   </div>
   <h1 class="m-6 text-xl font-semibold">Puntos de venta</h1>
   <div
     id="markers-link-container"
-    class="grid grid-cols-2 md:grid-cols-4 md:grid-flow-col gap-3 m-6 md:grid-rows-4 grid-rows-12"
+    class="grid md:grid-cols-5 md:px-14 grid-cols-2 px-10"
   >
   </div>
 </section>
@@ -54,107 +54,215 @@
       state: "Cuencame",
       coords: [24.8731588, -103.6988268],
       title: "Farmacia Isis",
+      dir: "Calle Severino Ceniceros 418",
     }, //Farmacia Isis
     {
       state: "Cuencame",
       coords: [24.8739564, -103.7004414],
       title: "Farmacia Fenix",
+      dir: "Av. Galeana 516"
     }, //Farmacia Fenix
     {
       state: "Peñón Blanco",
       coords: [24.7929959, -104.0294572],
       title: "Tienda naturizta el peñón",
+      dir: "Calzada Yerbaniz 163 Col 12 de Dic"
     }, //Tienda naturizta el peñón
     {
       state: "Guadalupe Victoria",
       coords: [24.4468502, -104.1199268],
       title: "Farmacia de los llanos 1",
+      dir: "Calzada Jose Ramon Valdez 500"
     }, //Farmacia de los llanos 1
     {
       state: "Guadalupe Victoria",
       coords: [24.4476294, -104.1235169],
       title: "Farmacia de los llanos 2",
+      dir:""
     }, //Farmacia de los llanos 2
     {
       state: "Guadalupe Victoria",
       coords: [24.4441118, -104.1211309],
       title: "Farmacia Zamar 1",
+      dir: "Avenida Morelos 307 sur"
     }, //Farmacia Zamar 1
     {
       state: "Francisco I. Madero",
       coords: [24.4043453, -104.3166439],
       title: "Miscelanea el pedregal",
+      dir: "Julian Carrillo 201 esq con Vicente Guerrero"
     }, //Miscelanea el pedregal
     {
       state: "Francisco I. Madero",
       coords: [24.3990707, -104.3236054],
       title: "Miscelanea Kristal",
+      dir: "Avenida Escuadron 201 #603 Barrio la Laguna"
     }, //Miscelanea Kristal
     {
       state: "Durango",
       coords: [24.0132702, -104.6377931],
       title: "Miscelanea Los Changos",
+      dir: "Calle Teresa de Calcuta 621 Col Valle del Guadiana"
     }, //Miscelanea Los Changos
     {
       state: "Durango",
       coords: [24.030117, -104.6456934],
       title: "Hotel Best Western",
+      dir: "Ginés Vázquez del Mercado 806 Zona Centro"
     }, //Hotel Best Western
     {
       state: "Durango",
       coords: [24.0289901, -104.6504929],
       title: "Clinica de medicina tradicional china",
+      dir: "Ginés Vázquez del Mercado 1207 Zona Centro"
     }, //Clinica de medicina tradicional china
     {
       state: "Durango",
       coords: [24.0241817, -104.6733577],
       title: "Cafetería la chabela",
+      dir: "Av 20 de Noviembre 913 Zona Centro"
     }, //Cafetería la chabela
     {
       state: "Durango",
       coords: [24.0249935, -104.6550049],
       title: "Conexus 1",
+      dir: "Porras 402 Zona Centro"
     }, //Conexus 1
     {
       state: "Durango",
       coords: [24.0095328, -104.7095952],
       title: "Conexus 2",
+      dir: ""
     }, //Conexus 2
     {
       state: "Durango",
       coords: [24.041571, -104.6636616],
       title: "Paleteria la michoacana y algo mas",
+      dir: "División Durango 317 Col 16 de Septiembre"
     }, //Paleteria la michoacana y algo mas
     {
       state: "Durango",
       coords: [24.0264942, -104.6484457],
       title: "Distribuidora especializada Médica",
+      dir: "Salubridad 104 Col Burócrata"
     }, //Distribuidora especializada Médica
+    // Farmacia Farmalivio	Carretera Panamericana S/N	Rodeo
+    {
+      state: "Rodeo",
+      coords: [25.1812898,-104.5618963],
+      title: "Farmacia Farmalivio",
+      dir: "Carretera Panamericana S/N"
+    },
+    // Farmacia Medical	Carretera Panamericana S/N	Rodeo
+    {
+      state: "Rodeo",
+      coords: [25.1784604,-104.5598537],
+      title: "Farmacia Medical",
+      dir: "Carretera Panamericana S/N"
+    },
+    // Farmacia Sagrado Corazon	Carretera Panamericana S/N	Rodeo
+    {
+      state: "Rodeo",
+      coords: [25.1765009,-104.5586884],
+      title: "Farmacia Sagrado Corazon",
+      dir: "Carretera Panamericana S/N"
+    },
+    // Miscelanea de Lupe y Pedro Flores	Domicilio conocido	Jose Ma Patoni
+    {
+      state: "Jose Ma Patoni",
+      coords: [24.8779257,-104.4534862],
+      title: "Miscelanea de Lupe y Pedro Flores",
+      dir: "Domicilio conocido"
+    },
+    // Farmacia San Miguel	Domicilio conocido	Coneto de Comonfort
+    {
+      state: "Coneto de Comonfort",
+      coords: [24.9804553,-104.7692973],
+      title: "Farmacia San Miguel",
+      dir: "Domicilio conocido"
+    },
+    // Miscelanea de Gloria Rochel	Domicilio conocido	San Francico Javier de Lajas
+    {
+      state: "San Francico Javier de Lajas",
+      coords: [24.9111839,-104.7062208],
+      title: "Miscelanea de Gloria Rochel",
+      dir: "Domicilio conocido"
+    },
+    // Farmacia Popular	Fco. Villa #68 Col Centro	San Juan del Rio
+    {
+      state: "San Juan del Rio",
+      coords: [24.77649,-104.4596259],
+      title: "Farmacia Popular",
+      dir: "Fco. Villa #68 Col Centro"
+    },
+    // Farmacia San Jose	Allende S/N Col Centro	San Juan del Rio
+    {
+      state: "San Juan del Rio",
+      coords: [24.77737,-104.4597127],
+      title: "Farmacia San Jose",
+      dir: "Allende S/N Col Centro"
+    },
   ];
+  
+  const states: string[] = []
+  markers.forEach(element => {
+    if(!states.includes(element.state))
+      states.push(element.state)
+  });
 
   function onClickMarkerAncor(index: number) {
     const marker = markers[index];
     map.setView(marker.coords, 17);
-    
   }
 
   for (let i = 0; i < markers.length; i++) {
     const mark = markers[i];
     L.marker(mark.coords, {
-      title: mark.title,
       alt: mark.title,
       zIndexOffset: 99,
     })
-      .bindTooltip(mark.title)
+      .bindTooltip(`<strong>${mark.title}</strong> <br/> ${mark.dir}`)
       .addTo(map);
-
-    const ancor = document.createElement("a");
-    const index = markers.indexOf(mark);
-
-    ancor.innerText = `${mark.title}, ${mark.state}`;
-    ancor.className = 'hover:bg-white hover:shadow-lg rounded-lg max-w-fit p-3 active:bg-saffron transition'
-    ancor.href ='#puntos-venta'
-    ancor.addEventListener("click", () => onClickMarkerAncor(index));
-    markersLinkContainer?.appendChild(ancor);
   }
+  function orderStates () {
+    const helper = []
+    states.forEach(state => {
+      let number = markers.filter(item => state == item.state).length
+      helper.push({number, state})
+    });
+    const sorted = helper.sort((a,b) => a.number - b.number)
+    console.log(sorted.flatMap( item => item.state))
+    return sorted.flatMap( item => item.state)
+  }
+
+  orderStates().forEach((state) => {
+    let marksByState = markers.filter(item => state == item.state)
+    if(marksByState.length > 1)
+      marksByState.sort((a, b) => a.title.localeCompare(b.title))
+    console.log(marksByState)
+
+    const container = document.createElement('div')
+    const title = document.createElement('h1')
+
+    container.classList.add('flex')
+    container.classList.add('flex-col')
+    
+    title.innerText = state
+    title.classList.add('font-semibold')
+    
+    container.appendChild(title)
+
+    for (const mark of marksByState) {
+      const ancor = document.createElement("a");
+      const index = markers.indexOf(mark);
+      
+      ancor.innerText = `${mark.title}`;
+      ancor.className =
+        "hover:bg-white hover:shadow-lg rounded-lg max-w-fit p-3 active:bg-saffron transition content-center";
+      ancor.href = "#puntos-venta";
+      ancor.addEventListener("click", () => onClickMarkerAncor(index));
+      container.appendChild(ancor)
+    }
+    markersLinkContainer?.appendChild(container);
+  })
 </script>
