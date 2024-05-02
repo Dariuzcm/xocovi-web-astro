@@ -47,7 +47,7 @@ const cardList: IngredientCardProps[] = [
   </h1>
 
   <div
-    class="mx-auto lg:max-w-[70%] flex flex-col justify-center items-center gap-4"
+    class="mx-auto lg:max-w-[60%] flex flex-col justify-center items-center gap-4 ingredient"
   >
     {cardList.map((item) => <IngredientCard {...item} />)}
   </div>
@@ -55,9 +55,20 @@ const cardList: IngredientCardProps[] = [
 
 <style>
   .xocovi-image {
-    background-image: linear-gradient(to bottom, rgb(241 187 10 ) 10%, transparent 95%), url('/xocovi-background.webp'); 
+    background-image: linear-gradient(
+        to bottom,
+        rgb(241 187 10) 10%,
+        transparent 95%
+      ),
+      url("/xocovi-background.webp");
     /* background-image: url("/xocovi-background.png"); */
     background-repeat: repeat space;
     background-size: 12rem;
+  }
+
+  @media (min-width: 600px) {
+    .ingredient {
+      max-width: 70%;
+    }
   }
 </style>
