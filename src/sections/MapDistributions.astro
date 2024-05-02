@@ -16,10 +16,10 @@
     class="rounded-lg m-6 shadow-lg w-11/12 h-3/4 md:w-2/3 lg:w-1/2 md:mx-auto min-h-[600px] md:max-h-[600px]"
   >
   </div>
-  <h1 class="m-6 text-xl font-semibold">Puntos de venta</h1>
+  <h1 class="m-6 text-xl font-semibold text-center">Puntos de venta</h1>
   <div
     id="markers-link-container"
-    class="grid md:grid-cols-5 md:px-14 grid-cols-2 px-10"
+    class="grid md:px-14 px-10 mx-auto w-fit"
   >
   </div>
 </section>
@@ -230,7 +230,7 @@
       let number = markers.filter(item => state == item.state).length
       helper.push({number, state})
     });
-    const sorted = helper.sort((a,b) => a.number - b.number)
+    const sorted = helper.sort((a,b) => a.state.localeCompare(b.state))
     console.log(sorted.flatMap( item => item.state))
     return sorted.flatMap( item => item.state)
   }
@@ -242,16 +242,21 @@
     console.log(marksByState)
 
     const container = document.createElement('div')
+    const statesContainer = document.createElement('div')
     const title = document.createElement('h1')
 
-    container.classList.add('flex')
-    container.classList.add('flex-col')
+    container.classList.add('grid')
+    container.classList.add('grid-col')
+    container.classList.add('grid-cols-1')
     
+    statesContainer.classList.add('grid')
+    statesContainer.classList.add('grid-col')
+    statesContainer.classList.add('grid-cols-3')
     title.innerText = state
     title.classList.add('font-semibold')
     
     container.appendChild(title)
-
+    container.appendChild(statesContainer)
     for (const mark of marksByState) {
       const ancor = document.createElement("a");
       const index = markers.indexOf(mark);
@@ -261,7 +266,7 @@
         "hover:bg-white hover:shadow-lg rounded-lg max-w-fit p-3 active:bg-saffron transition content-center";
       ancor.href = "#puntos-venta";
       ancor.addEventListener("click", () => onClickMarkerAncor(index));
-      container.appendChild(ancor)
+      statesContainer.appendChild(ancor)
     }
     markersLinkContainer?.appendChild(container);
   })
